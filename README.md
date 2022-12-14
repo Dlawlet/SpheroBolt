@@ -1,16 +1,16 @@
 # SpheroBolt
 The Purpose of the project in this repository is to :
 1) Understand and get full control of sphero bolt robot
-2) Implement swarm behaviour over Bolt 
+2) Implement swarm behaviour over Bolt    
 Link to the drive : https://drive.google.com/drive/folders/1IiVMOUZykn09_1tVKfp_dGZxOYvhKSlI
-# requirement 
+# Requirement 
 To run the project, the requirement are : 
 * bluetooth (bt) ( can handle up to 7 connexions at once)
 * Python > 3.7 
 * lib Spherov2 (https://github.com/artificial-intelligence-class/spherov2.py)
 * |__lib Bleak
 
-# usage 
+# Usage 
 1) Clone the repository 
 2) Install the dependencies previously mentionned 
 3) Execute the following command : " python main.py 'XXXXX' " whre XXXX is the name of the bolt such as 'SB-AA77'
