@@ -2,7 +2,7 @@
 The Purpose of the project in this repository is to :
 1) Understand and get full control of sphero bolt robot
 2) Implement swarm behaviour over Bolt 
-
+Link to the drive : https://drive.google.com/drive/folders/1IiVMOUZykn09_1tVKfp_dGZxOYvhKSlI
 # requirement 
 To run the project, the requirement are : 
 * bluetooth (bt) ( can handle up to 7 connexions at once)
