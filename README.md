@@ -32,6 +32,7 @@ To run the project, the requirement are :
     * Test TCPadapter connexion [connexion refused]
 
 ## Future
-    * create and animation with 15 bolts using IR communication, LED main display and collision ( before January )
+    * Create and animation with 15 bolts using IR communication, LED main display and collision ( before January )
+    * Create a launcher to start multiple bots at once ( already started )
     * More advanced behaviour of the swarm (to be defined)
 
