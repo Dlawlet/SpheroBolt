@@ -1,2 +1,2 @@
-trapsp = [(0,0),*10]
-print(trapsp)
+import sys
+sys.path.append("D:\spherotestPR.py\spherov2")

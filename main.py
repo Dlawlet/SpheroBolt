@@ -3,9 +3,8 @@ import sys
 import time
 from numpy import linalg as LA
 from spherov2 import scanner
-from spherov2.sphero_edu import SpheroEduAPI, EventType
-from spherov2.types import Color
-from threading import Thread
+from ..spherov2.sphero_edu import SpheroEduAPI, EventType
+from ..spherov2.types import Color
 
 ############################################################################################################
 #Functions
@@ -52,32 +51,20 @@ def mouve(droid):
 
 
 def main():
-    global mainLed_color, bot_orientation, bot_speed
+    toy = scanner.find_toy(toy_name="S10-7F73")
     with SpheroEduAPI(toy) as droid:
-        droid.register_event(EventType.on_collision, onCollision)
-        droid.set_front_led(frontLed_color)
-        #droid.reset_aim()                                  # note the bot save his orientation beetwen two runs
-       
-        
-        while True:
-            #droid.start_ir_broadcast(0,1)
-            #droid.set_main_led(mainLed_color)
-
-            mouve(droid)
+        droid.set_main_led(Color(r=0, g=0, b=255))
+        droid.set_speed(60)
+        time.sleep(2)
+        droid.set_speed(0)
+        print(droid.get_acceleration()['x'])
+            
             
 
 ############################################################################################################
 # constants
 ############################################################################################################       
-toy = scanner.find_toy(toy_name=sys.argv[1])
-speed = [(0,0),(0,0)]
-trapsp = [1,1,1]
 
-flag = 1
-mainLed_color = Color(0, 0, 255)
-bot_orientation = 0
-bot_speed = 100
-frontLed_color = Color(0, 0, 255)
 
 
 ############################################################################################################
