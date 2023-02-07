@@ -1,4 +1,5 @@
 import random
+import sys
 import time
 import numpy as np
 from spherov2 import scanner
@@ -53,7 +54,7 @@ def trap_escape(droid):
 
 
 def onCollision(droid):
-    global mainLed_color,  bot_speed, lock, curDirection,r,lock, flag, block_movement
+    global mainLed_color,  bot_speed, lock, curDirection,r,lock, flag, block_movement, offset
     if flag:      #if the collision is already detected, then
         return      
     flag = True
@@ -67,7 +68,7 @@ def onCollision(droid):
         r= (r+1)%4
         print("curDirection=", curDirection)
         #Change direction randomly by random degrees
-        curDirection = randomReflect(curDirection, 50)
+        curDirection = randomReflect(curDirection, offset)
         droid.roll(curDirection, bot_speed, 1)
         #droid.roll(curDirection, 255, 1)
         #time.sleep(0.1)
@@ -79,17 +80,23 @@ def onCollision(droid):
         
 
 def move(droid):
-    global bot_speed,curDirection,block_movement
+    global bot_speed,curDirection,block_movement,offset
+
+    direction_counter = random.randint(1,2 )
     try:
-        while True:
-            if not block_movement:
-                droid.roll(curDirection, bot_speed, 20)
+        if not block_movement:
+            droid.roll(curDirection, bot_speed, direction_counter)
+        offset = 50
+        onCollision(droid)
+        offset = 90
+
+        move(droid)
     except KeyboardInterrupt:
         print("Thread interrupted by user")
     
     
 def connection():
-    toy = scanner.find_toy(toy_name="SB-7F73")
+    toy = scanner.find_toy(toy_name=sys.argv[1])
     return toy
 
 
@@ -135,10 +142,11 @@ block_movement = False
 mainLed_color = Color(255, 0, 255)
 frontLed_color = Color(0, 0, 255)
 
-bot_speed = 80 # 0-255 
+bot_speed = 90 # 0-255 
 
 lock = Lock()
 
+offset = 90
 
 ############################################################################################################
 # Main
