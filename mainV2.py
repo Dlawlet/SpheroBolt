@@ -31,19 +31,20 @@ def trap_escape(droid):
                     with lock:
                         # Change direction randomly by 180 degrees
                         curDirection = int(curDirection + 180)%360
-                        time.sleep(0.1)
-                        droid.roll(curDirection, bot_speed, 10)
+                        droid.roll(curDirection, 60, 10)
+                        time.sleep(1)
                     trap_speed_list = [1, 1, 1]
     except KeyboardInterrupt:
         print("Thread interrupted by user")
 
 
 def onCollision(droid):
-    global mainLed_color,  bot_speed, lock, curDirection,r,lock, flag
+    global mainLed_color,  bot_speed, lock, curDirection,r,lock, flag, block_movement
     if flag:      #if the collision is already detected, then
         return      
     flag = True
     try:
+        block_movement = True
         print("in collision")
         #colorlist containinfg the following colors: red, green, blue, white
         colors=[Color(255, 0, 0),Color(0, 255, 0),Color(0, 0, 255),Color(255, 255, 255)]
@@ -54,18 +55,21 @@ def onCollision(droid):
         #Change direction randomly by random degrees
         curDirection = int(curDirection + 270)%360    # 90 is the angle of the collision to draw a losange with 45° at start on left
         bot_speed = -bot_speed
+        #droid.roll(curDirection, 255, 1)
+        #time.sleep(0.1)
         print("out collision")
     finally:
+        block_movement = False
         flag = False
-        #move(droid)
+        move(droid)
         
 
 def move(droid):
-    global bot_speed,curDirection
+    global bot_speed,curDirection,block_movement
     try:
         while True:
-            time.sleep(0.1)
-            droid.roll(curDirection, bot_speed, 10)
+            if not block_movement:
+                droid.roll(curDirection, bot_speed, 10)
     except KeyboardInterrupt:
         print("Thread interrupted by user")
     
@@ -110,7 +114,7 @@ speed = [(0,0),(0,0)]
 trap_speed_list = [1,1,1]
 curDirection = 315
 flag = False
-
+block_movement = False
 # set mainLed_color to purple
 mainLed_color = Color(255, 0, 255)
 frontLed_color = Color(0, 0, 255)
