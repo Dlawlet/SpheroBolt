@@ -95,6 +95,8 @@ def move(droid):
             try:
                 droid.stop_roll()
                 droid.strobe(Color(255, 57, 66), (3 / 15) * .5, 15)
+                while int(droid.get_luminosity()['ambient_light']) > 500:
+                    droid.stop_roll()
             finally:
                 block_movement = False
                 
