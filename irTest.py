@@ -45,7 +45,10 @@ def move(droid):
     
     
 def connection():
-    toy = scanner.find_toy(toy_name=serial_numbers[int(sys.argv[1])-1])
+    if len(sys.argv) > 1:
+        toy = scanner.find_toy(toy_name=serial_numbers[int(sys.argv[1])-1])
+    else:
+        toy = scanner.find_toy()
     return toy
 
 
@@ -57,7 +60,8 @@ def main():
         while True:
             try: 
                 droid.set_front_led(frontLed_color)
-                droid.send_ir_message(1,32)
+                #droid.send_ir_message(1,32)
+                pass
             except KeyboardInterrupt:
                 print("Thread interrupted by user")
                 break
